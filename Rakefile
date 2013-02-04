@@ -1,4 +1,4 @@
-%w{ bundler/setup rubygems fileutils uri net/http tmpdir digest/md5 ./doc/markit }.each do |file|
+%w{ bundler/setup rubygems fileutils uri net/http tmpdir digest/md5 }.each do |file|
   require file
 end
 
@@ -20,7 +20,6 @@ task :build do
   recreate_dirs
   download_tools
   patch_ruby
-  download_installables
   copy_files
   install_gems
   clone_repositories
@@ -29,7 +28,7 @@ end
 
 def recreate_dirs
   FileUtils.rm_rf BUILD_DIR
-  %w{ docs home install repo tools }.each do |dir|
+  %w{ home install tools }.each do |dir|
     FileUtils.mkdir_p "#{BUILD_DIR}/#{dir}"
   end
   FileUtils.mkdir_p CACHE_DIR
@@ -41,11 +40,11 @@ end
 
 def download_tools
   [
-    %w{ http://conemu-maximus5.googlecode.com/files/ConEmuPack.120727c.7z                         ConEmu },
-    %w{ http://vim-win3264.googlecode.com/files/vim73-x64.zip                                     Vim },
+    %w{ conemu-maximus5.googlecode.com/files/ConEmuPack.120727c.7z                         ConEmu },
+    %w{ vim-win3264.googlecode.com/files/vim73-x64.zip                                     Vim },
     %w{ msysgit.googlecode.com/files/PortableGit-1.7.10-preview20120409.7z                        portablegit },
-    %w{ http://files.vagrantup.com/packages/476b19a9e5f499b5d0b9d4aba5c0b16ebe434311/Vagrant.msi  vagrant },
-    %w{ http://font.ubuntu.com/download/ubuntu-font-family-0.80.zip                               fonts },
+    %w{ files.vagrantup.com/packages/476b19a9e5f499b5d0b9d4aba5c0b16ebe434311/Vagrant.msi  vagrant },
+    %w{ font.ubuntu.com/download/ubuntu-font-family-0.80.zip                               fonts },
 
   ]
   .each do |host_and_path, target_dir, includes = ''|
