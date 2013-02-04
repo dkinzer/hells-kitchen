@@ -50,27 +50,9 @@ if "%HTTP_PROXY%"=="" (
 :: otherwise it would become confused when W:\ is unmounted 
 set VBOX_USER_HOME=%USERPROFILE%
 
-:: fix for http://code.google.com/p/msysgit/issues/detail?id=184,
-:: but use TERM=rxvt instead of TERM=msys to not break `vagrant ssh` terminal
-set TERM=rxvt
-
-:: show the environment
-echo VAGRANTDIR=%VAGRANTDIR%
-echo RUBYDIR=%RUBYDIR%
-echo VBOX_USER_HOME=%VBOX_USER_HOME%
-echo VBOX_INSTALL_PATH=%VBOX_INSTALL_PATH%
-echo KDIFF3DIR=%KDIFF3DIR%
-echo CYGWINSSHDIR=%CYGWINSSHDIR%
-echo CYGWINRSYNCDIR=%CYGWINRSYNCDIR%
-echo CONSOLE2DIR=%CONSOLE2DIR%
-echo SUBLIMEDIR=%SUBLIMEDIR%
-echo PUTTYDIR=%PUTTYDIR%
-echo GITDIR=%GITDIR%
-echo GIT_CONF_USERNAME=%GIT_CONF_USERNAME%
-echo GIT_CONF_EMAIL=%GIT_CONF_EMAIL%
-echo HTTP_PROXY=%HTTP_PROXY%
+set TERM=msys
 
 :: command aliases
-@doskey vi=sublime_text $*
+@doskey vi=gvim $*
 
 set PATH=%VAGRANTDIR%\bin;%RUBYDIR%\bin;%GITDIR%\cmd;%KDIFF3DIR%;%CYGWINRSYNCDIR%;%CYGWINSSHDIR%;%CONSOLE2DIR%;%SUBLIMEDIR%;%PUTTYDIR%;%VBOX_INSTALL_PATH%;%PATH%

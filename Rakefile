@@ -2,7 +2,7 @@
   require file
 end
 
-VERSION = '0.9-SNAPSHOT'
+VERSION = '0.1-a'
 BASE_DIR = File.expand_path('.', File.dirname(__FILE__)) 
 TARGET_DIR  = "#{BASE_DIR}/target" 
 BUILD_DIR   = "#{BASE_DIR}/target/build"
@@ -20,10 +20,8 @@ task :build do
   recreate_dirs
   download_tools
   patch_ruby
-  # download_boxes
   download_installables
   copy_files
-  generate_docs
   install_gems
   clone_repositories
   assemble_kitchen
@@ -31,7 +29,7 @@ end
 
 def recreate_dirs
   FileUtils.rm_rf BUILD_DIR
-  %w{ boxes docs home install repo tools }.each do |dir|
+  %w{ docs home install repo tools }.each do |dir|
     FileUtils.mkdir_p "#{BUILD_DIR}/#{dir}"
   end
   FileUtils.mkdir_p CACHE_DIR
@@ -41,25 +39,14 @@ def copy_files
   FileUtils.cp_r Dir.glob("#{BASE_DIR}/files/*"), "#{BUILD_DIR}"
 end
 
-def generate_docs
-  Dir.glob("#{BASE_DIR}/*.md").each do |md_file|
-    html = MarkIt.to_html(IO.read(md_file))
-    outfile = "#{BUILD_DIR}/_#{File.basename(md_file, '.md')}.html"
-    File.open(outfile, 'w') {|f| f.write(html) }
-  end
-end
-
 def download_tools
   [
-    %w{ cloud.github.com/downloads/adoxa/ansicon/ansi153.zip                                      ansicon },
-    %w{ sourceforge.net/projects/console/files/console-devel/2.00/Console-2.00b148-Beta_32bit.zip console2 },
-    %w{ www.holistech.co.uk/sw/hostsedit/hostsedit.zip                                            hostedit },
-    %w{ c758482.r82.cf2.rackcdn.com/Sublime%20Text%202.0.1%20x64.zip                              sublimetext2 },
+    %w{ http://conemu-maximus5.googlecode.com/files/ConEmuPack.120727c.7z                         ConEmu },
+    %w{ http://vim-win3264.googlecode.com/files/vim73-x64.zip                                     Vim },
     %w{ msysgit.googlecode.com/files/PortableGit-1.7.10-preview20120409.7z                        portablegit },
-    %w{ files.vagrantup.com/packages/eb590aa3d936ac71cbf9c64cf207f148ddfc000a/vagrant_1.0.3.msi   vagrant },
-    %w{ switch.dl.sourceforge.net/project/kdiff3/kdiff3/0.9.96/KDiff3Setup_0.9.96.exe             kdiff3 
-        kdiff3.exe },
-    %w{ the.earth.li/~sgtatham/putty/0.62/x86/putty.zip                                           putty }
+    %w{ http://files.vagrantup.com/packages/476b19a9e5f499b5d0b9d4aba5c0b16ebe434311/Vagrant.msi  vagrant },
+    %w{ http://font.ubuntu.com/download/ubuntu-font-family-0.80.zip                               fonts },
+
   ]
   .each do |host_and_path, target_dir, includes = ''|
     download_and_unpack "http://#{host_and_path}", "#{BUILD_DIR}/tools/#{target_dir}", includes.split('|')    
@@ -72,25 +59,6 @@ def patch_ruby
     FileUtils.rm_rf "#{ruby_dir}/#{dir}"
   end
   download_and_unpack "http://cloud.github.com/downloads/thecodeshop/ruby/tcs-ruby193_require_fenix_gc_hash_20120527.7z", ruby_dir
-end
-
-def download_boxes
-  %w{ 
-    ubuntu-12.04-server-amd64-bare-os.box 
-    ubuntu-12.04-server-amd64-vagrant.box
-  }
-  .each do |file|
-    download "http://dl.dropbox.com/u/13494216/#{file}.box", "#{BUILD_DIR}/boxes/#{file}.box"   
-  end
-end
-
-def download_installables
-  %w{ 
-    www.gringod.com/wp-upload/MONACO.TTF
-  }
-  .each do |host_and_path|
-    download "http://#{host_and_path}", "#{BUILD_DIR}/install/#{File.basename(host_and_path)}"
-  end
 end
 
 def install_gems
@@ -106,26 +74,19 @@ end
 
 def clone_repositories
   [ 
-    %w{ npverni/cucumber-sublime2-bundle.git  tools/sublimetext2/Data/Packages/Cucumber },
-    %w{ cabeca/SublimeChef.git          tools/sublimetext2/Data/Packages/Chef },
-    %w{ tknerr/bills-kitchen-repo.git       repo/my-chef-repo },
-    %w{ tknerr/cookbooks-vagrant-ohai.git     repo/my-cookbooks/vagrant-ohai },
-    %w{ tknerr/cookbooks-motd.git         repo/my-cookbooks/motd },
-    %w{ tknerr/cookbooks-tdd-example.git    repo/my-cookbooks/tdd-example },
-    %w{ tknerr/vagrant-baseboxes.git      repo/my-baseboxes }
+    %w{ dkinzer/.vim.git  home/vimfiles },
   ]
   .each do |repo, dest|
     system("git clone git://github.com/#{repo} #{BUILD_DIR}/#{dest}")
-    # for release check out branches as per https://gist.github.com/2928593
-    if release? && repo.start_with?('tknerr/')
-      system("cd #{BUILD_DIR}/#{dest} && git checkout -t origin/bills-kitchen-#{major_version}_branch")
+    if release? && repo.start_with?('jenkinslaw/')
+      system("cd #{BUILD_DIR}/#{dest} && git checkout -t origin/hells-kitchen-#{major_version}_branch")
     end
   end
 end
 
 def assemble_kitchen
   if release?
-    pack BUILD_DIR, "#{TARGET_DIR}/bills-kitchen-#{VERSION}.7z"
+    pack BUILD_DIR, "#{TARGET_DIR}/hells-kitchen-#{VERSION}.7z"
   end
 end
 
