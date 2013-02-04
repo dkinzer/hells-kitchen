@@ -1,21 +1,7 @@
 [core]
-	editor = sublime_text.exe
+	editor = vim.exe
 	autocrlf = input
-[diff]
-	tool = kdiff3
-[difftool]
-	prompt = false
-[difftool "kdiff3"]
-	path = "kdiff3.exe"
 	trustExitCode = false
-[merge]
-	tool = kdiff3
-[mergetool]
-	prompt = false
-[mergetool "kdiff3"]
-	path = "kdiff3.exe"
-	trustExitCode = false
-	keepBackup = false
 [alias]
 	co = checkout
 	ci = commit
@@ -25,7 +11,6 @@
 	slog = log --pretty=oneline --abbrev-commit
 [http]
 	sslVerify = false
-	# proxy = http://your.proxy.org:8080
 [user]
-	name = dummy
-	email = dummy
+  name = dkinzer
+	email = dtkinzer@gmail.com

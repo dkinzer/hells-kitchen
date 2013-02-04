@@ -17,13 +17,13 @@ end
 
 desc 'downloads required resources and builds the devpack binary'
 task :build do
-  recreate_dirs
-  download_tools
-  patch_ruby
-  copy_files
-  install_gems
-  clone_repositories
-  assemble_kitchen
+   recreate_dirs
+   download_tools
+   patch_ruby
+   copy_files
+   install_gems
+#  clone_repositories
+#  assemble_kitchen
 end
 
 def recreate_dirs
@@ -40,11 +40,13 @@ end
 
 def download_tools
   [
-    %w{ conemu-maximus5.googlecode.com/files/ConEmuPack.120727c.7z                         ConEmu },
-    %w{ vim-win3264.googlecode.com/files/vim73-x64.zip                                     Vim },
-    %w{ msysgit.googlecode.com/files/PortableGit-1.7.10-preview20120409.7z                        portablegit },
+    %w{ conemu-maximus5.googlecode.com/files/ConEmuPack.120727c.7z                         conemu },
+    %w{ vim-win3264.googlecode.com/files/vim73-x64.zip                                     vim },
+    %w{ msysgit.googlecode.com/files/PortableGit-1.8.1.2-preview20130201.7z                        portablegit },
     %w{ files.vagrantup.com/packages/476b19a9e5f499b5d0b9d4aba5c0b16ebe434311/Vagrant.msi  vagrant },
-    %w{ font.ubuntu.com/download/ubuntu-font-family-0.80.zip                               fonts },
+    %w{ font.ubuntu.com/download/ubuntu-font-family-0.80.zip                               fonts ubunto.zip},
+    %w{ the.earth.li/~sgtatham/putty/latest/x86/putty.exe                               putty },
+    %w{ sourceforge.net/projects/filezilla/files/FileZilla_Client/3.6.0.2/FileZilla_3.6.0.2_win32.zip                               filezilla  filezilla.zip},
 
   ]
   .each do |host_and_path, target_dir, includes = ''|
@@ -91,7 +93,8 @@ end
 
 def download_and_unpack(url, target_dir, includes = []) 
   Dir.mktmpdir do |tmp_dir| 
-    outfile = "#{tmp_dir}/#{File.basename(url)}"
+    filename = File.basename(url)
+    outfile = "#{tmp_dir}/#{filename}"
     download(url, outfile)
     unpack(outfile, target_dir, includes)
   end

@@ -1,14 +1,16 @@
 source 'http://rubygems.org'
 
 # core gems we need for cookin'
-gem 'vagrant', :git => 'https://github.com/jenkinslaw/vagrant.git', :branch => 'bills-kitchen'
-gem 'chef', '10.16.2'
-gem 'knife-solo', :git => 'https://github.com/jenkinslaw/knife-solo.git', :branch => 'bills-kitchen'
+
+# vagrant 1-0-stable plus fix for windows ssh.
+gem 'vagrant', :git => 'https://github.com/jenkinslaw/vagrant.git', :branch => 'windows-ssh'
+gem 'chef', '11.0.0'
+gem 'knife-solo', :git => 'https://github.com/jenkinslaw/knife-solo.git', :branch => 'windows-client-fixed'
 gem 'knife-solo_data_bag', '0.3.0'
-gem 'veewee', '0.3.1'
+gem 'veewee'
 
 # gems for cookbook dependency management
-gem 'librarian', '0.0.26.1' #, :git => 'https://github.com/tknerr/librarian.git', :branch => 'fix_recursive_copy'
+gem 'librarian', :git => 'https://github.com/tknerr/librarian.git', :branch => 'fix_recursive_copy'
 gem 'builder', '3.0.3' # if not specified explicitly `bundle update` will run in an infinite loop.
 
 # extra gems required by chef on windows (see GH-5)
@@ -16,7 +18,7 @@ gem 'ruby-wmi', '0.4.0'
 gem 'win32-service', '0.7.2'
 
 # the holistic cookbook testing framework from Opscode
-gem 'test-kitchen', '0.7.0'
+gem 'test-kitchen', '0.7.1'
 
 # Cookbook linting
 gem 'foodcritic', '1.6.1'
