@@ -2,12 +2,12 @@
   require file
 end
 
-VERSION = '0.1-a'
+VERSION = '0.1-SNAPSHOT'
 BASE_DIR = File.expand_path('.', File.dirname(__FILE__)) 
 TARGET_DIR  = "#{BASE_DIR}/target" 
 BUILD_DIR   = "#{BASE_DIR}/target/build"
 CACHE_DIR   = "#{BASE_DIR}/target/cache"
-ZIP_EXE = 'C:\Program Files\7-Zip\7z.exe'
+ZIP_EXE = 'C:\Program Files (x86)\7-ZIP_64_bit\7z.exe'
 
 
 desc 'cleans all output and cache directories'
@@ -22,8 +22,8 @@ task :build do
    patch_ruby
    copy_files
    install_gems
-#  clone_repositories
-#  assemble_kitchen
+   clone_repositories
+   assemble_kitchen
 end
 
 def recreate_dirs
@@ -45,8 +45,8 @@ def download_tools
     %w{ msysgit.googlecode.com/files/PortableGit-1.8.1.2-preview20130201.7z                        portablegit },
     %w{ files.vagrantup.com/packages/476b19a9e5f499b5d0b9d4aba5c0b16ebe434311/Vagrant.msi  vagrant },
     %w{ font.ubuntu.com/download/ubuntu-font-family-0.80.zip                               fonts ubunto.zip},
-    %w{ the.earth.li/~sgtatham/putty/latest/x86/putty.exe                               putty },
-    %w{ sourceforge.net/projects/filezilla/files/FileZilla_Client/3.6.0.2/FileZilla_3.6.0.2_win32.zip                               filezilla  filezilla.zip},
+    %w{ the.earth.li/~sgtatham/putty/0.62/x86/putty.zip                               putty },
+    %w{ sourceforge.net/projects/filezilla/files/FileZilla_Client/3.6.0.2/FileZilla_3.6.0.2_win32.zip filezilla  filezilla.zip},
 
   ]
   .each do |host_and_path, target_dir, includes = ''|

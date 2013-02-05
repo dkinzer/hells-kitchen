@@ -3,29 +3,29 @@ source 'http://rubygems.org'
 # core gems we need for cookin'
 
 # vagrant 1-0-stable plus fix for windows ssh.
-gem 'vagrant', :git => 'https://github.com/jenkinslaw/vagrant.git', :branch => 'windows-ssh'
-gem 'chef', '11.0.0'
+gem 'vagrant', '>=1.0.2', :git => 'https://github.com/jenkinslaw/vagrant.git', :branch => 'windows-ssh'
+gem 'chef', '>=10.18.0'
 gem 'knife-solo', :git => 'https://github.com/jenkinslaw/knife-solo.git', :branch => 'windows-client-fixed'
-gem 'knife-solo_data_bag', '0.3.0'
+gem 'knife-solo_data_bag', '>=0.3.0'
 gem 'veewee'
 
 # gems for cookbook dependency management
 gem 'librarian', :git => 'https://github.com/tknerr/librarian.git', :branch => 'fix_recursive_copy'
-gem 'builder', '3.0.3' # if not specified explicitly `bundle update` will run in an infinite loop.
+gem 'builder', '>=3.0.3' # if not specified explicitly `bundle update` will run in an infinite loop.
 
 # extra gems required by chef on windows (see GH-5)
-gem 'ruby-wmi', '0.4.0'
-gem 'win32-service', '0.7.2'
+gem 'ruby-wmi', '>=0.4.0'
+gem 'win32-service', '>=0.7.2'
 
 # the holistic cookbook testing framework from Opscode
-gem 'test-kitchen', '0.7.1'
+gem 'test-kitchen', '>=0.7.0'
 
 # Cookbook linting
-gem 'foodcritic', '1.6.1'
+gem 'foodcritic', '>=1.6.1'
 
 # chefspec and friends
-gem 'chefspec', '0.9.0'
-gem 'fauxhai', '0.0.4'
-gem 'eventmachine', '1.0.0.rc4' # enforce v1.0.0.x - previous versions would not install on Windows
+gem 'chefspec', '>=0.9.0'
+gem 'fauxhai', '>=0.0.4'
+gem 'eventmachine', '>=1.0.0.rc4' # enforce v1.0.0.x - previous versions would not install on Windows
 
 
