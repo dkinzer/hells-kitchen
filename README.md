@@ -1,4 +1,3 @@
-
 Hells' Kitchen
 ==============
 
@@ -10,9 +9,8 @@ I've trimmed down Bill's Kitchen considerably for my specific needs, and I make 
   * ConEmu instead of Console2
   * Vim instead of SublimeText.
     * Plus my personal .vim configurations and submodules.
-  * No KDiff3 since Vim-Fugitive will take care of all my Git needs.
+    * No KDiff3 since Vim-Fugitive will take care of all my Git needs.
   
-  * Pre-configured Chef Repo with Vagrantfile to bring up a ready-to-use Chef Server 
   * devkit enhanced Ruby 1.9.3 ([TCS-Ruby](https://github.com/thecodeshop/ruby/wiki/Downloads), load time improvements >50%!) with lots of useful gems pre-installed:
  
   * Basic gems:
