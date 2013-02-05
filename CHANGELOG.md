@@ -1,3 +1,10 @@
+# [0.1-SNAPSHOT]
+* Rename to Hells-Kitchen.
+* Using Vim and ConEmu.
+* Added FileZilla.
+* Runs batfile automatically when opening shell.
+* Updated cygwin and 
+* Fixed Rakefile depencies so that projec builds.
 
 # [0.9-SNAPSHOT]
 

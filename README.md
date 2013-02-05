@@ -2,7 +2,7 @@
 Hells' Kitchen
 ==============
 
-A portable package for my Chef and Vagrant development environment on Windows.  
+A portable package for my Knife-Solo and Vagrant development environment on Windows.  
 
 I origionally forked this from [Bill's Kitchen](https://github.com/tknerr/bills-kitchen) -- so make sure you take a look at that project and give them their props. 
 
@@ -43,7 +43,9 @@ Requires [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
 Installation
 ============
 
-As a prerequisite for building bill's kitchen you need 7zip installed in `C:\Program Files\7-Zip\7z.exe`.
+As a prerequisite for building bill's kitchen you need 7zip installed in `C:\Program Files (x86)\7-ZIP_64_bit\7z.exe`. 
+
+(You will clearly also need Ruby and DevKit enabled if you are building from scratch).
 
 Build the kitchen (make sure you don't have spaces in the path):
 
@@ -63,5 +65,4 @@ Make sure you have  [VirtualBox](https://www.virtualbox.org/wiki/Downloads) inst
 
 1. unzip the `target/hells-kitchen-<version>.7z` somewhere
 1. mount the kitchen to the `W:\` drive by double-clicking the `mount-w-drive.bat` file
-1. click `W:\Launch Console.lnk` to open a command prompt
-1. in the command prompt run `W:\set-env.bat` to set up the PATH etc 
+1. click `W:\ConEmu.lnk` to open a command prompt
