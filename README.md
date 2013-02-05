@@ -55,7 +55,7 @@ bundle install
 rake build
 ```
 
-This might take a while (you can go fetch a coffee). It will download the external dependencies and assemble the kitchen in the `target/build` directory, which is then packaged as `target/bills-kitchen-<version>.7z`
+This might take a while (you can go fetch a coffee). It will download the external dependencies and assemble the kitchen in the `target/build` directory, which is then packaged as `target/hells-kitchen-<version>.7z`
 
 
 Usage
