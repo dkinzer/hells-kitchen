@@ -7,7 +7,7 @@ gem 'vagrant', '>=1.0.2', :git => 'https://github.com/jenkinslaw/vagrant.git', :
 gem 'chef', '>=10.18.0'
 gem 'knife-solo', :git => 'https://github.com/jenkinslaw/knife-solo.git', :branch => 'windows-client-fixed'
 gem 'knife-solo_data_bag', '>=0.3.0'
-gem 'veewee'
+gem 'veewee', '0.3.1'
 
 # gems for cookbook dependency management
 gem 'librarian', :git => 'https://github.com/tknerr/librarian.git', :branch => 'fix_recursive_copy'

@@ -7,7 +7,7 @@ BASE_DIR = File.expand_path('.', File.dirname(__FILE__))
 TARGET_DIR  = "#{BASE_DIR}/target" 
 BUILD_DIR   = "#{BASE_DIR}/target/build"
 CACHE_DIR   = "#{BASE_DIR}/target/cache"
-ZIP_EXE = 'C:\Program Files (x86)\7-ZIP_64_bit\7z.exe'
+ZIP_EXE = 'C:\Program Files\7-ZIP\7z.exe'
 
 
 desc 'cleans all output and cache directories'
@@ -19,11 +19,11 @@ desc 'downloads required resources and builds the devpack binary'
 task :build do
    recreate_dirs
    download_tools
-   patch_ruby
+   #patch_ruby
    copy_files
-   install_gems
-   clone_repositories
-   assemble_kitchen
+   #install_gems
+   #clone_repositories
+   #assemble_kitchen
 end
 
 def recreate_dirs
@@ -40,10 +40,12 @@ end
 
 def download_tools
   [
+    %w{ rubyforge.org/frs/download.php/76706/rubyinstaller-1.9.3-p374.exe ruby},
+    %w{ github.com/downloads/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe devkit },
+
     %w{ conemu-maximus5.googlecode.com/files/ConEmuPack.120727c.7z                         conemu },
     %w{ vim-win3264.googlecode.com/files/vim73-x64.zip                                     vim },
     %w{ msysgit.googlecode.com/files/PortableGit-1.8.1.2-preview20130201.7z                        portablegit },
-    %w{ files.vagrantup.com/packages/476b19a9e5f499b5d0b9d4aba5c0b16ebe434311/Vagrant.msi  vagrant },
     %w{ font.ubuntu.com/download/ubuntu-font-family-0.80.zip                               fonts ubunto.zip},
     %w{ the.earth.li/~sgtatham/putty/0.62/x86/putty.zip                               putty },
     %w{ sourceforge.net/projects/filezilla/files/FileZilla_Client/3.6.0.2/FileZilla_3.6.0.2_win32.zip filezilla  filezilla.zip},
@@ -67,7 +69,6 @@ def install_gems
     system("#{BUILD_DIR}/set-env.bat \
       && git config --global --unset user.name \
       && git config --global --unset user.email \
-      && gem uninstall vagrant -a -x -I \
       && gem install bundler -v 1.2.1 --no-ri --no-rdoc \
       && bundle install --gemfile=#{BUILD_DIR}/Gemfile --verbose")
   end
