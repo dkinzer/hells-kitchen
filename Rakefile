@@ -15,6 +15,8 @@ task :clean do
   FileUtils.rm_rf TARGET_DIR
 end
 
+task :default => :build
+
 desc 'downloads required resources and builds the devpack binary'
 task :build do
    recreate_dirs
