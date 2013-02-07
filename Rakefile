@@ -1,4 +1,4 @@
-%w{ bundler/setup rubygems fileutils uri net/http tmpdir digest/md5 }.each do |file|
+%w{ bundler/setup rubygems fileutils uri net/https tmpdir digest/md5 }.each do |file|
   require file
 end
 
@@ -19,10 +19,10 @@ task :default => :build
 
 desc 'downloads required resources and builds the devpack binary'
 task :build do
-   recreate_dirs
+   #recreate_dirs
    download_tools
    #patch_ruby
-   copy_files
+   #copy_files
    #install_gems
    #clone_repositories
    #assemble_kitchen
@@ -42,7 +42,7 @@ end
 
 def download_tools
   [
-    %w{ rubyforge.org/frs/download.php/76706/rubyinstaller-1.9.3-p374.exe ruby},
+   # %w{ rubyforge.org/frs/download.php/76707/ruby-1.9.3-p374-i386-mingw32.7z ruby},
     %w{ github.com/downloads/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe devkit },
 
     %w{ conemu-maximus5.googlecode.com/files/ConEmuPack.120727c.7z                         conemu },
@@ -122,9 +122,16 @@ def download_no_cache(url, outfile, limit=5)
   raise ArgumentError, 'HTTP redirect too deep' if limit == 0
 
   puts "download '#{url}'"
-  uri = URI(url)
-  Net::HTTP.start(uri.host, uri.port) do |http|
-    http.request_get(uri.path + (uri.query ? "?#{uri.query}" : '')) do |response|
+  uri = URI.parse url
+  http = Net::HTTP.new uri.host, uri.port
+
+  if uri.port == 443
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    http.use_ssl = true
+  end 
+
+  http.start do |agent|
+    agent.request_get(uri.path + (uri.query ? "?#{uri.query}" : '')) do |response|
       # handle 301/302 redirects
       redirect_url = response['location']
       if(redirect_url)
