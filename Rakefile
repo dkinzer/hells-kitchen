@@ -19,13 +19,12 @@ task :default => :build
 
 desc 'downloads required resources and builds the devpack binary'
 task :build do
-   #recreate_dirs
+   recreate_dirs
    download_tools
-   #patch_ruby
-   #copy_files
-   #install_gems
-   #clone_repositories
-   #assemble_kitchen
+   copy_files
+   install_gems
+   clone_repositories
+   assemble_kitchen
 end
 
 def recreate_dirs
@@ -42,7 +41,7 @@ end
 
 def download_tools
   [
-   # %w{ rubyforge.org/frs/download.php/76707/ruby-1.9.3-p374-i386-mingw32.7z ruby},
+    %w{ rubyforge.org/frs/download.php/76707/ruby-1.9.3-p374-i386-mingw32.7z ruby},
     %w{ github.com/downloads/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe devkit },
 
     %w{ conemu-maximus5.googlecode.com/files/ConEmuPack.120727c.7z                         conemu },
@@ -69,8 +68,6 @@ end
 def install_gems
   Bundler.with_clean_env do
     system("#{BUILD_DIR}/set-env.bat \
-      && git config --global --unset user.name \
-      && git config --global --unset user.email \
       && gem install bundler -v 1.2.1 --no-ri --no-rdoc \
       && bundle install --gemfile=#{BUILD_DIR}/Gemfile --verbose")
   end
