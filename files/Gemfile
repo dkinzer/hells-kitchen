@@ -1,15 +1,12 @@
 source 'http://rubygems.org'
 
-# core gems we need for cookin'
-
+# core gems we need for cooking'
 gem 'knife-solo', :git => 'https://github.com/matschaffer/knife-solo.git'
 gem 'veewee', :git => 'https://github.com/jedi4ever/veewee.git'
+gem 'knife-solo_data_bag'
 
 # gems for cookbook dependency management
 gem 'librarian'
 
 # Cookbook linting
 gem 'foodcritic'
-
-
-

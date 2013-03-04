@@ -27,6 +27,10 @@ task :build do
    assemble_kitchen
 end
 
+task :install_gems do
+  install_gems
+end
+
 def recreate_dirs
   FileUtils.rm_rf BUILD_DIR
   %w{ home install tools }.each do |dir|
@@ -42,8 +46,8 @@ end
 def download_tools
   [
     %w{ rubyforge.org/frs/download.php/76707/ruby-1.9.3-p374-i386-mingw32.7z ruby},
-    %w{ github.com/downloads/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe devkit },
-
+    #%w{ github.com/downloads/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe devkit },
+    %w{ rubyforge.org/frs/download.php/76805/DevKit-mingw64-32-4.7.2-20130224-1151-sfx.exe devkit },
     %w{ conemu-maximus5.googlecode.com/files/ConEmuPack.120727c.7z                         conemu },
     %w{ vim-win3264.googlecode.com/files/vim73-x64.zip                                     vim },
     %w{ msysgit.googlecode.com/files/PortableGit-1.8.1.2-preview20130201.7z                        portablegit },
@@ -67,9 +71,7 @@ end
 
 def install_gems
   Bundler.with_clean_env do
-    system("#{BUILD_DIR}/set-env.bat \
-      && gem install bundler -v 1.2.1 --no-ri --no-rdoc \
-      && bundle install --gemfile=#{BUILD_DIR}/Gemfile --verbose")
+    system("sh #{BUILD_DIR}/install_gems.sh")
   end
 end
 
@@ -151,7 +153,7 @@ def unpack(archive, target_dir, includes = [])
   when '.zip', '.7z'
     system("\"#{ZIP_EXE}\" x -o\"#{target_dir}\" -y \"#{archive}\" 1> NUL")
   when '.exe'
-    system("\"#{ZIP_EXE}\" e -o\"#{target_dir}\" -y \"#{archive}\" -r #{includes.join(' ')} 1> NUL")
+    system("\"#{ZIP_EXE}\" x -o\"#{target_dir}\" -y \"#{archive}\" -r #{includes.join(' ')} 1> NUL")
   when '.msi'
     system("start /wait msiexec /a \"#{archive.gsub('/', '\\')}\" /qb TARGETDIR=\"#{target_dir.gsub('/', '\\')}\"")
   else 
