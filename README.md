@@ -1,3 +1,18 @@
+#DEPRICATED#
+
+It's nice getting Windows to behave a lot like Linux, but evetually it dawned on me that the constant battle
+with configurations and packages that is needed in order to keep Windows playing nice is just not fun.
+
+I have finally embraced Linux whole heartidly, and I'm deprecating hells-kitchen in favor of [heavens-kitchen](https://github.com/dkinzer/heavens-kitchen).
+
+If you are like me, you probably know your way around the command line pretty well and are happy enough in either
+OS.  But ask yourself, exactly how many of the Windows tools do you actually use vs. ported Linux tools?
+
+It's hard to believe I've stuck with Windows for as long as I have.
+
+Try [heavens-kitchen](https://github.com/dkinzer/heavens-kitchen) for Umbutu.  Development is just a smoother more fun experience when you are not in constant
+battle with your tools.
+
 Hells' Kitchen
 ==============
 
