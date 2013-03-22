@@ -1,4 +1,4 @@
-#DEPRICATED#
+#DEPRECATED#
 
 It's nice getting Windows to behave a lot like Linux, but evetually it dawned on me that the constant battle
 with configurations and packages that is needed in order to keep Windows playing nice is just not fun.
@@ -12,6 +12,8 @@ It's hard to believe I've stuck with Windows for as long as I have.
 
 Try [heavens-kitchen](https://github.com/dkinzer/heavens-kitchen) for Umbutu.  Development is just a smoother more fun experience when you are not in constant
 battle with your tools.
+
+____
 
 Hells' Kitchen
 ==============
